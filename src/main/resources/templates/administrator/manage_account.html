@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+
+<html lang="en" class="material-style layout-fixed"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<title>Empire | B4+ admin template by Srthemesvilla</title>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="description"
+	content="Empire Bootstrap admin template made using Bootstrap 4, it has tons of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
+<meta name="keywords"
+	content="Empire, bootstrap admin template, bootstrap admin panel, bootstrap 4 admin template, admin template">
+<meta name="author" content="Srthemesvilla" />
+<link rel="icon" type="image/x-icon"
+	th:href="@{/assets/img/favicon.ico}">
+
+<!-- Google fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
+	rel="stylesheet">
+
+<!-- Icon fonts -->
+<link rel="stylesheet" th:href="@{/assets/fonts/fontawesome.css}">
+<link rel="stylesheet" th:href="@{/assets/fonts/ionicons.css}">
+<link rel="stylesheet" th:href="@{/assets/fonts/linearicons.css}">
+<link rel="stylesheet" th:href="@{/assets/fonts/open-iconic.css}">
+<link rel="stylesheet" th:href="@{/assets/fonts/pe-icon-7-stroke.css}">
+<link rel="stylesheet" th:href="@{/assets/fonts/feather.css}">
+
+<!-- Core stylesheets -->
+<link rel="stylesheet" th:href="@{/assets/css/bootstrap-material.css}">
+<link rel="stylesheet" th:href="@{/assets/css/shreerang-material.css}">
+<link rel="stylesheet" th:href="@{/assets/css/uikit.css}">
+
+<!-- Libs -->
+<link rel="stylesheet"
+	th:href="@{/assets/libs/perfect-scrollbar/perfect-scrollbar.css}">
+
+<!-- mycss -->
+<link rel="stylesheet" th:href="@{/assets/css/pages/table.css}">
+<style type="text/css">
+a {
+	font-size: calc(12px + ( 16 - 12)* ((100vw- 360px)/(1600- 300)))
+		!important;
+}
+</style>
+</head>
+
+<body>
+	<!-- [ Preloader ] Start -->
+	<div class="page-loader">
+		<div class="bg-primary"></div>
+	</div>
+	<!-- [ Preloader ] Ebd -->
+
+	<!-- [ Layout wrapper ] Start -->
+	<div class="layout-wrapper layout-2">
+		<div class="layout-inner">
+			<!-- [ Layout sidenav ] Start -->
+			<div th:replace="fragment/admin/menu.html :: menu"></div>
+			<!-- [ Layout sidenav ] End -->
+			<!-- [ Layout container ] Start -->
+			<div class="layout-container">
+				<!-- [ Layout navbar ( Header ) ] Start -->
+				<div th:replace="fragment/admin/nav-header.html :: header"></div>
+				<!-- [ Layout navbar ( Header ) ] End -->
+
+				<!-- [ Layout content ] Start -->
+				<div class="layout-content">
+					<div id="message" th:if="${message!=null && message.status==true}"
+						class="alert alert-dark-success alert-dismissible fade show">
+						<button type="button" class="close" data-dismiss="alert">×</button>
+						[[${message.message}]]
+					</div>
+					<div id="message" th:if="${message!=null && message.status==false}"
+						class="alert alert-dark-danger alert-dismissible fade show">
+						<button type="button" class="close" data-dismiss="alert">×</button>
+						[[${message.message}]]
+					</div>
+					<!-- [ content ] Start -->
+					<div class="container-fluid flex-grow-1 container-p-y">
+						<h4 class="font-weight-bold py-3 mb-0">Bootstrap</h4>
+						<div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="#"><i
+										class="feather icon-home"></i></a></li>
+								<li class="breadcrumb-item">Tables</li>
+								<li class="breadcrumb-item active">Bootstrap</li>
+							</ol>
+						</div>
+						<div id="add-form" class="card mb-4" style="display: none">
+							<h6 class="card-header">Thêm tài khoản</h6>
+							<div class="card-body">
+								<form id="form-add" th:object="${account}"
+									th:action="@{/admin/manage-account/add}" method="post">
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label class="form-label">Email</label> <input type="email"
+												class="form-control" th:field="*{email}" placeholder="Email"
+												required>
+											<div class="clearfix"></div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="form-label">Số điện thoại</label> <input
+												type="tel" th:field="*{phone}" class="form-control"
+												placeholder="Phone number" required>
+											<div class="clearfix"></div>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label class="form-label">Họ và tên</label> <input
+												th:field="*{fullname}" class="form-control"
+												placeholder="Fullname" required>
+											<div class="clearfix"></div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="form-label">Mật khẩu</label> <input
+												th:field="*{password}" autocomplete="new-password"
+												type="password" class="form-control" placeholder="Password">
+											<div class="clearfix"></div>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="col-md-12">
+											<label class="form-label">Quyền hạn</label>
+											<div class="form-group">
+
+												<div class="row" style="margin: 10px 0">
+													<label th:each="role : ${roles}"
+														class="custom-control custom-checkbox m-0 col-md-3 col-sm-6">
+														<input th:field="*{roles}" th:value="${role.roleId}"
+														type="checkbox" class="custom-control-input"> <span
+														class="custom-control-label" th:text="${role.roleName}">Check
+															me out</span>
+													</label>
+												</div>
+											</div>
+										</div>
+									</div>
+									<button type="submit" class="btn btn-success">Xác nhận</button>
+									<button type="submit" class="btn btn-danger cancel-form">Hủy</button>
+								</form>
+							</div>
+						</div>
+						<div id="update-form" class="card mb-4" th:if="${user!=null}">
+							<h6 class="card-header">Cập nhật tài khoản</h6>
+							<div class="card-body">
+								<form id="form-update" th:object="${user}"
+									th:action="@{/admin/manage-account/update}" method="post">
+									<div class="form-row">
+										<input th:field="*{userId}" hidden="true" /> <input
+											th:field="*{email}" hidden="true" /> <input
+											th:field="*{phone}" hidden="true" /> <input
+											th:field="*{fullname}" hidden="true" /> <input
+											th:field="*{password}" hidden="true" />
+										<div class="col-md-12">
+											<label class="form-label ">Quyền hạn</label>
+											<div class="row" style="margin: 10px 0">
+												<label th:each="role : ${roles}"
+													class="custom-control custom-checkbox m-0 col-md-3 col-sm-6">
+													<input type="checkbox" th:field="*{roles}"
+													th:value="${role.roleId}" class="custom-control-input">
+													<span class="custom-control-label"
+													th:text="${role.roleName}">Check me out</span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="col-md-12">
+											<label class="form-label">Trạng thái</label>
+											<div class="row form-check form-switch"
+												style="margin-top: 10px">
+
+												<div class="form-group">
+													<i class="lnr lnr-lock"></i> <span class="switch switch-sm">
+														<input name="locked" type="checkbox" class="switch"
+														id="switch-sm" th:checked="${!user.locked}"> <label
+														for="switch-sm"></label>
+													</span> <i class="feather icon-unlock"></i>
+												</div>
+											</div>
+										</div>
+									</div>
+									<button type="submit" class="btn btn-success">Xác nhận</button>
+									<a id="button-reset-password" class="btn btn-warning"
+										th:href="@{'/admin/reset-password/'+${user.userId}}">Reset
+										password</a>
+									<button class="btn btn-danger cancel-form">Hủy</button>
+								</form>
+							</div>
+						</div>
+
+						<hr class="border-light container-m--x my-4">
+
+						<div class="table-responsive mb-4">
+							<div class="row"
+								style="margin-right: 0; justify-content: space-between;">
+
+								<h5 class="col-md-6 col-sm-6">Quản lí tài khoản</h5>
+								<button class="btn btn-success" onClick="addForm()">Thêm
+									tài khoản</button>
+							</div>
+							<table class="table table-hover table-dark">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Họ và tên</th>
+										<th>Email</th>
+										<th>Phone</th>
+										<th>Quyền hạn</th>
+										<th>Chức năng</th>
+									</tr>
+								</thead>
+								<tbody
+									th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
+									<tr th:each="account: ${listUser}">
+										<th scope="row" th:text="${account.userId}">1</th>
+										<td th:text="${account.fullname}">Mark</td>
+										<td th:text="${account.email}">Otto</td>
+										<td th:text="${account.phone}">@mdo</td>
+										<td>
+											<div th:each="role: ${account.roles}">
+												<label class="form-check"> <input
+													th:class="'role-'+${account.userId}+ ' form-check-input'"
+													type="checkbox" checked disabled> <span
+													class="form-check-label" th:text="${role.roleName}"></span>
+												</label>
+											</div>
+										</td>
+
+										<td><a class="btn btn-info btn-sm mt-1"
+											th:href="${urlBuilder.replaceQueryParam('userId', account.userId).toUriString()}">
+												<i class="feather icon-edit"></i> Edit
+										</a> <!-- 	<button th:onclick="setValueDeleteId([[${account.userId}]])"
+												class="btn btn-danger btn-sm mt-1" data-toggle="modal"
+												data-target="#my-modal">
+												<i class="lnr lnr-trash"></i> Delete
+											</button>--></td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+						<div id="pagination" style="float: right;"></div>
+
+					</div>
+					<!-- [ content ] End -->
+
+					<!-- [ comfirm ] Start -->
+					<div class="container d-flex justify-content-center">
+						<div id="my-modal" class="modal fade" tabindex="-1" role="dialog"
+							aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content border-0">
+									<div class="modal-body p-0">
+										<div class="card border-0 p-sm-3 p-2 justify-content-center">
+											<div class="card-header pb-0 bg-white border-0 ">
+												<div class="row">
+													<div class="col ml-auto">
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+												</div>
+												<p class="font-weight-bold mb-2">Bạn có chắc muốn xóa
+													tài khoản này?</p>
+											</div>
+											<div class="card-body px-sm-4 mb-2 pt-1 pb-0">
+												<div class="row justify-content-end no-gutters">
+													<div class="col-auto">
+														<button type="button" class="btn btn-light text-muted"
+															data-dismiss="modal">Hủy</button>
+													</div>
+													<div class="col-auto">
+														<form th:action="@{/admin/account/delete}" method="post">
+															<input type="text" name="userId" id="data_delete"
+																hidden="true" />
+															<button type="submit" class="btn btn-danger px-4">Xóa</button>
+														</form>
+
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- [ comfirm ] End -->
+					<button class="btn btn-default" id="btn-confirm">Confirm</button>
+
+					<div class="modal fade" tabindex="-1" role="dialog"
+						aria-labelledby="mySmallModalLabel" aria-hidden="true"
+						id="mi-modal">
+						<div class="modal-dialog modal-sm">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<h4 class="modal-title" id="myModalLabel">Confirmar</h4>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" id="modal-btn-si">Si</button>
+									<button type="button" class="btn btn-primary" id="modal-btn-no">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="alert" role="alert" id="result"></div>
+					<!-- [ Layout footer ] Start -->
+					<nav class="layout-footer footer bg-white">
+						<div
+							class="container-fluid d-flex flex-wrap justify-content-between text-center container-p-x pb-3">
+							<div class="pt-3">
+								<span class="footer-text font-weight-semibold">&copy; <a
+									href="https://srthemesvilla.com" class="footer-link"
+									target="_blank">Srthemesvilla</a></span>
+							</div>
+							<div>
+								<a href="javascript:" class="footer-link pt-3">About Us</a> <a
+									href="javascript:" class="footer-link pt-3 ml-4">Help</a> <a
+									href="javascript:" class="footer-link pt-3 ml-4">Contact</a> <a
+									href="javascript:" class="footer-link pt-3 ml-4">Terms
+									&amp; Conditions</a>
+							</div>
+						</div>
+					</nav>
+					<!-- [ Layout footer ] End -->
+
+				</div>
+				<!-- [ Layout content ] Start -->
+
+			</div>
+			<!-- [ Layout container ] End -->
+
+		</div>
+
+		<!-- Overlay -->
+		<div class="layout-overlay layout-sidenav-toggle"></div>
+	</div>
+	<!-- [ Layout wrapper ] end -->
+
+	<!-- Core scripts -->
+	<script th:src="@{/assets/js/pace.js}"></script>
+	<script th:src="@{/assets/js/jquery-3.3.1.min.js}"></script>
+	<script th:src="@{/assets/libs/popper/popper.js}"></script>
+	<script th:src="@{/assets/js/bootstrap.js}"></script>
+	<script th:src="@{/assets/js/sidenav.js}"></script>
+	<script th:src="@{/assets/js/layout-helpers.js}"></script>
+	<script th:src="@{/assets/js/material-ripple.js}"></script>
+
+	<!-- Libs -->
+	<script th:src="@{/assets/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
+
+
+	<!-- Demo -->
+	<script th:src="@{/assets/js/demo.js}"></script>
+	<script th:src="@{/assets/js/analytics.js}"></script>
+
+	<!-- Pagination -->
+	<script th:src="@{/assets/js/jquery.bootpag.min.js}"></script>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+
+		var totalPage = /*[[${pages}]]*/'default';
+
+		var page = /*[[${param.page}]]*/'1';
+
+		/*]]>*/
+		page = page ? page : 1
+		$('#pagination').bootpag({
+			total : totalPage,
+			page : page,
+			leaps : true,
+			firstLastUse : true,
+			href : "/admin/manage-account?page={{number}}",
+			first : '←',
+			last : '→',
+			wrapClass : 'pagination',
+			activeClass : 'active',
+			disabledClass : 'disabled',
+			nextClass : 'next',
+			prevClass : 'prev',
+			lastClass : 'last',
+			firstClass : 'first'
+		}).on("page", function(event, num) {
+			$(".content4").html("Page " + num); // or some ajax content loading...
+		});
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html lang="vi" class="material-style layout-fixed"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<title>Empire | B4+ admin template by Srthemesvilla</title>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="description"
+	content="Empire Bootstrap admin template made using Bootstrap 4, it has tons of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
+<meta name="keywords"
+	content="Empire, bootstrap admin template, bootstrap admin panel, bootstrap 4 admin template, admin template">
+<meta name="author" content="Srthemesvilla" />
+<link rel="icon" type="image/x-icon"
+	th:href="@{/assets/img/favicon.ico}">
+
+<!-- Google fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
+	rel="stylesheet">
+
+<!-- Icon fonts -->
+<link rel="stylesheet" th:href="@{/assets/fonts/fontawesome.css}">
+<link rel="stylesheet" th:href="@{/assets/fonts/ionicons.css}">
+<link rel="stylesheet" th:href="@{/assets/fonts/linearicons.css}">
+<link rel="stylesheet" th:href="@{/assets/fonts/open-iconic.css}">
+<link rel="stylesheet" th:href="@{/assets/fonts/pe-icon-7-stroke.css}">
+<link rel="stylesheet" th:href="@{/assets/fonts/feather.css}">
+
+<!-- Core stylesheets -->
+<link rel="stylesheet" th:href="@{/assets/css/bootstrap-material.css}">
+<link rel="stylesheet" th:href="@{/assets/css/shreerang-material.css}">
+<link rel="stylesheet" th:href="@{/assets/css/uikit.css}">
+
+<!-- Libs -->
+<link rel="stylesheet"
+	th:href="@{/assets/libs/perfect-scrollbar/perfect-scrollbar.css}">
+<link rel="stylesheet" th:href="@{/assets/libs/flot/flot.css}">
+
+
+</head>
+
+<body>
+	<!-- [ Preloader ] Start -->
+	<div class="page-loader">
+		<div class="bg-primary"></div>
+	</div>
+	<!-- [ Preloader ] End -->
+
+	<!-- [ Layout wrapper ] Start -->
+	<div class="layout-wrapper layout-2">
+		<div class="layout-inner">
+			<!-- [ Layout sidenav ] Start -->
+			<div th:replace="fragment/admin/menu.html :: menu"></div>
+			<!-- [ Layout sidenav ] End -->
+			<!-- [ Layout container ] Start -->
+			<div class="layout-container">
+				<!-- [ Layout navbar ( Header ) ] Start -->
+				<div th:replace="fragment/admin/nav-header.html :: header"></div>
+				<!-- [ Layout navbar ( Header ) ] End -->
+
+				<!-- [ Layout content ] Start -->
+				<div class="layout-content">
+
+					<!-- [ content ] Start -->
+					<div class="container-fluid flex-grow-1 container-p-y">
+						<h4 class="font-weight-bold py-3 mb-0">Dashboard</h4>
+
+						<div class="row">
+							<!-- 1st row Start -->
+							<div class="col-lg-12">
+								<div class="row">
+									<div class="col-md-3 col-sm-4 col-6"
+										th:each="orderStatus: ${ordersStatus}">
+										<div class="card mb-4">
+											<div class="card-body">
+												<div
+													class="d-flex align-items-center justify-content-between">
+													<div class="w-100">
+														<h2 class="mb-2">
+															<th:block th:text="${orderStatus[1]}"></th:block>
+															<i
+																th:class="${'ml-3 feather icon-package text-'+orderStatus[2]}"></i>
+														</h2>
+														<span th:class="${'w-100 badge badge-'+orderStatus[2]}"
+															style="text-transform: uppercase;"
+															th:text="${orderStatus[0]}">Revenue</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- 1st row Start -->
+						</div>
+						<div class="row">
+							<!-- 1st row Start -->
+							<div class="col-md-12">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="card mb-4 bg-pattern-3 bg-primary text-white">
+											<div class="card-body">
+												<div class="d-flex align-items-center">
+													<div class="feather icon-star display-4"></div>
+													<div class="ml-3">
+														<div class="small">Số lượt đánh giá sản phẩm</div>
+														<div class="text-large" th:text="${numRates}">2362</div>
+													</div>
+												</div>
+												<div id="order-chart-1" class="mt-3 chart-shadow"
+													style="height: 70px"></div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="card mb-4 bg-pattern-3-dark">
+											<div class="card-body">
+												<div class="d-flex align-items-center">
+													<div class="lnr lnr-gift display-4 text-primary"></div>
+													<div class="ml-3">
+														<div class="text-muted small">Số sản phẩm đang bán</div>
+														<div class="text-large" th:text="${numProducts}">985</div>
+													</div>
+												</div>
+												<div id="ecom-chart-3" class="mt-3 chart-shadow-primary"
+													style="height: 70px"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- 1st row Start -->
+						</div>
+						<div class="row">
+							<!-- 3rd row Start -->
+							<div class="col-xl-12">
+								<div class="card mb-4">
+									<div class="card-header with-elements pb-0">
+										<h4 class="card-header-title mb-0">Đơn hàng chờ xử lí</h4>
+									</div>
+									<div class="nav-tabs-top">
+										<div class="tab-content table-responsive">
+											<table class="table card-table" style="min-height: fit-content">
+												<thead class="thead-light">
+													<tr>
+														<th>Mã đơn hàng</th>
+														<th>Ngày đặt</th>
+														<th>Địa chỉ giao hàng</th>
+														<th>Số gói sản phẩm</th>
+														<th>Số tiền</th>
+														<th>Chi tiết</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr th:each="order : ${orders}">
+														<td th:text="${order.id}">1</td>
+														<td th:text="${#dates.format(order.created, 'dd-MM-yyyy HH:mm')}">Mark</td>
+														<td th:text="${order.address.address+ ', '+ order.address.city.cityName}">Otto</td>
+														<td ><p th:text="${order.items.size()+' gói sản phẩm'}"></p> </td>
+														
+														<td th:text="${#numbers.formatInteger(order.total,3,'COMMA')+' VNĐ'}">@mdo</td>
+														<td ><a class="btn btn-info" th:href="@{/shop/order/{id}(id=${order.id})}">Xem</a></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- 3rd row Start -->
+						</div>
+
+					</div>
+					<!-- [ content ] End -->
+
+					<!-- [ Layout footer ] Start -->
+					<nav class="layout-footer footer bg-white">
+						<div
+							class="container-fluid d-flex flex-wrap justify-content-between text-center container-p-x pb-3">
+							<div class="pt-3">
+								<span class="footer-text font-weight-semibold">&copy; <a
+									href="https://srthemesvilla.com" class="footer-link"
+									target="_blank">Srthemesvilla</a></span>
+							</div>
+							<div>
+								<a href="javascript:" class="footer-link pt-3">About Us</a> <a
+									href="javascript:" class="footer-link pt-3 ml-4">Help</a> <a
+									href="javascript:" class="footer-link pt-3 ml-4">Contact</a> <a
+									href="javascript:" class="footer-link pt-3 ml-4">Terms
+									&amp; Conditions</a>
+							</div>
+						</div>
+					</nav>
+					<!-- [ Layout footer ] End -->
+				</div>
+				<!-- [ Layout content ] Start -->
+			</div>
+			<!-- [ Layout container ] End -->
+		</div>
+		<!-- Overlay -->
+		<div class="layout-overlay layout-sidenav-toggle"></div>
+	</div>
+	<!-- [ Layout wrapper] End -->
+
+	<!-- Core scripts -->
+	<script th:src="@{/assets/js/pace.js}"></script>
+	<script th:src="@{/assets/js/jquery-3.3.1.min.js}"></script>
+	<script th:src="@{/assets/libs/popper/popper.js}"></script>
+	<script th:src="@{/assets/js/bootstrap.js}"></script>
+	<script th:src="@{/assets/js/sidenav.js}"></script>
+	<script th:src="@{/assets/js/layout-helpers.js}"></script>
+	<script th:src="@{/assets/js/material-ripple.js}"></script>
+
+	<!-- Libs -->
+	<script th:src="@{/assets/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
+	<script th:src="@{/assets/libs/eve/eve.js}"></script>
+	<script th:src="@{/assets/libs/flot/flot.js}"></script>
+	<script th:src="@{/assets/libs/flot/curvedLines.js}"></script>
+	<script th:src="@{/assets/libs/chart-am4/core.js}"></script>
+	<script th:src="@{/assets/libs/chart-am4/charts.js}"></script>
+	<script th:src="@{/assets/libs/chart-am4/animated.js}"></script>
+
+	<!-- Demo -->
+	<script th:src="@{/assets/js/demo.js}"></script>
+	<script th:src="@{/assets/js/analytics.js}"></script>
+	<script th:src="@{/assets/js/pages/dashboards_index.js}"></script>
+</body>
+
+</html>

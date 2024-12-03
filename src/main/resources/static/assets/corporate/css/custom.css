@@ -1,0 +1,36 @@
+/* here you can put your own css to customize and override the theme */
+.btn-link{
+    cursor: pointer;
+    margin-left: 20px;
+    float: right;
+}
+.product-quantity {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	min-width: 200px;
+}
+.shopping-total span {
+	font: 18px  sans-serif;
+	text-transform: capitalize;
+}
+.font-size-price{
+	font-size: 18px
+}
+
+.text {
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* number of lines to show */
+	line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+.shop-banner{
+	padding: 25px;
+    background: white;
+    margin: 20px 0;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    border-bottom: 2px solid #e94d1c;
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html lang="en" class="material-style layout-fixed"  xmlns = "http://www.w3.org/1999/xhtml" xmlns:th = "http://www.thymeleaf.org"
+   xmlns:sec = "http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <title>Empire | B4+ admin template by Srthemesvilla</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="Empire Bootstrap admin template made using Bootstrap 4, it has tons of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
+    <meta name="keywords" content="Empire, bootstrap admin template, bootstrap admin panel, bootstrap 4 admin template, admin template">
+    <meta name="author" content="Srthemesvilla" />
+    <link rel="icon" type="image/x-icon" th:href="@{/assets/img/favicon.ico}">
+
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+
+    <!-- Icon fonts -->
+    <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome.css}">
+    <link rel="stylesheet" th:href="@{/assets/fonts/ionicons.css}">
+    <link rel="stylesheet" th:href="@{/assets/fonts/linearicons.css}">
+    <link rel="stylesheet" th:href="@{/assets/fonts/open-iconic.css}">
+    <link rel="stylesheet" th:href="@{/assets/fonts/pe-icon-7-stroke.css}">
+    <link rel="stylesheet" th:href="@{/assets/fonts/feather.css}">
+
+    <!-- Core stylesheets -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap-material.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/shreerang-material.css}">
+    <link rel="stylesheet" thhref="@{/assets/css/uikit.css}">
+
+    <!-- Libs -->
+    <link rel="stylesheet" th:href="@{/assets/libs/perfect-scrollbar/perfect-scrollbar.css}">
+    <!-- Page -->
+    <link rel="stylesheet" th:href="@{/assets/css/pages/authentication.css}">
+</head>
+
+<body>
+    <!-- [ Preloader ] Start -->
+    <div class="page-loader">
+        <div class="bg-primary"></div>
+    </div>
+    <!-- [ Preloader ] End -->
+
+    <!-- [ content ] Start -->
+    <div class="authentication-wrapper authentication-1 px-4">
+        <div class="authentication-inner py-5">
+
+            <!-- [ Logo ] Start -->
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="ui-w-60">
+                    <div class="w-100 position-relative">
+                        <img th:src="@{/assets/img/logo-dark.png}" alt="Brand Logo" class="img-fluid">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ Logo ] End -->
+
+            <!-- [ Form ] Start -->
+            <form class="my-5" th:object="${user}" autocomplete="off" method="post" oninput='comfirmPass.setCustomValidity(comfirmPass.value != password.value ? "Mật khẩu không khớp." : "")'>
+                <div class="form-group">
+                    <label for="fullname" class="form-label">Tên của bạn</label>
+                    <input type="text" class="form-control" th:field="*{fullname}" autocomplete="off" required="required" >
+                    <div class="clearfix"></div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" th:field="*{email}" autocomplete="off" required="required">
+                    <div class="clearfix"></div>
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="form-label">Số điện thoại</label>
+                    <input type="tel" class="form-control" th:field="*{phone}" autocomplete="off" required="required">
+                    <div class="clearfix"></div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="form-label">Mật khẩu</label>
+                    <input type="password" class="form-control" th:field="*{password}" autocomplete="new-password" required="required">
+                    <div class="clearfix"></div>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPass" class="form-label">Nhập lại mật khẩu</label>
+                    <input type="password" class="form-control" id=comfirmPass name="comfirmPass" autocomplete="new-password" required="required">
+                    <div class="clearfix"></div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mt-4">Sign Up</button>
+                <div class="bg-lightest text-muted small p-2 mt-4">
+                    By clicking "Sign Up", you agree to our
+                    <a href="javascript:void(0)">terms of service and privacy policy</a>. We’ll occasionally send you account related emails.
+                </div>
+            </form>
+            <!-- [ Form ] End -->
+
+            <div class="text-center text-muted">
+                Already have an account?
+                <a href="pages_authentication_login-v1.html">Sign In</a>
+            </div>
+
+        </div>
+    </div>
+    <!-- [ content ] End -->
+
+    <!-- Core scripts -->
+    <script th:src="@{/assets/js/pace.js}"></script>
+    <script th:src="@{/assets/js/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{/assets/libs/popper/popper.js}"></script>
+    <script th:src="@{/assets/js/bootstrap.js}"></script>
+    <script th:src="@{/assets/js/sidenav.js}"></script>
+    <script th:src="@{/assets/js/layout-helpers.js}"></script>
+    <script th:src="@{/assets/js/material-ripple.js}"></script>
+
+    <!-- Libs -->
+    <script th:src="@{/assets/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
+
+    <!-- Demo -->
+    <script th:src="@{/assets/js/demo.js}"></script><script th:src="@{/assets/js/analytics.js}"></script>
+</body>
+
+</html>

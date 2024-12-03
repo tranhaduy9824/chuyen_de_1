@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<!--
+Template: Metronic Frontend Freebie - Responsive HTML Template Based On Twitter Bootstrap 3.3.4
+Version: 1.0.0
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Like: www.facebook.com/keenthemes
+Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+-->
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.thymeleaf.org ">
+<!--<![endif]-->
+
+<!-- Head BEGIN -->
+<head>
+<meta charset="utf-8">
+<title>Sản phẩm | Smart Shop</title>
+
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<meta content="Metronic Shop UI description" name="description">
+<meta content="Metronic Shop UI keywords" name="keywords">
+<meta content="keenthemes" name="author">
+
+<meta property="og:site_name" content="-CUSTOMER VALUE-">
+<meta property="og:title" content="-CUSTOMER VALUE-">
+<meta property="og:description" content="-CUSTOMER VALUE-">
+<meta property="og:type" content="website">
+<meta property="og:image" content="-CUSTOMER VALUE-">
+<!-- link to image for socio -->
+<meta property="og:url" content="-CUSTOMER VALUE-">
+
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}">
+
+
+<!-- Fonts START -->
+<link
+	href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all"
+	rel="stylesheet" type="text/css">
+<!-- Fonts END -->
+
+
+<!-- Global styles START -->
+<link th:href="@{/assets/plugins/font-awesome/css/font-awesome.min.css}"
+	rel="stylesheet">
+<link th:href="@{/assets/plugins/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet">
+<!-- Global styles END -->
+
+<!-- Page level plugin styles START -->
+<link th:href="@{/assets/plugins/fancybox/source/jquery.fancybox.css}"
+	rel="stylesheet">
+<link th:href="@{/assets/plugins/owl.carousel/assets/owl.carousel.css}"
+	rel="stylesheet">
+<link th:href="@{/assets/plugins/uniform/css/uniform.default.css}"
+	rel="stylesheet" type="text/css">
+<link
+	href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"
+	rel="stylesheet" type="text/css">
+<!-- for slider-range -->
+<link th:href="@{/assets/plugins/rateit/src/rateit.css}"
+	rel="stylesheet" type="text/css">
+<!-- Page level plugin styles END -->
+
+<!-- Theme styles START -->
+<link th:href="@{/assets/pages/css/components.css}" rel="stylesheet">
+<link th:href="@{/assets/corporate/css/style.css}" rel="stylesheet">
+<link th:href="@{/assets/pages/css/style-shop.css}" rel="stylesheet"
+	type="text/css">
+<link th:href="@{/assets/corporate/css/style-responsive.css}"
+	rel="stylesheet">
+<link th:href="@{/assets/corporate/css/themes/red.css}" rel="stylesheet"
+	id="style-color">
+<link th:href="@{/assets/corporate/css/custom.css}" rel="stylesheet">
+<!-- Theme styl@{es END -->
+
+</head>
+<!-- Head END -->
+
+<!-- Body BEGIN -->
+<body class="ecommerce">
+
+
+	<!-- BEGIN TOP BAR -->
+	<div th:replace="fragment/app/top-bar.html :: top-bar"></div>
+	<!-- END TOP BAR -->
+
+	<!-- BEGIN HEADER -->
+	<div th:replace="fragment/app/header.html :: header"></div>
+	<!-- Header END -->
+
+	<div class="main">
+		<div class="container">
+			<ul class="breadcrumb">
+				<li><a th:href="@{/home}">Trang chủ</a></li>
+				<li><a th:href="@{/product-list}">Sản phẩm</a></li>
+				<li><a class="active" th:text="${product.category}"></a></li>
+			</ul>
+			<!-- BEGIN SIDEBAR & CONTENT -->
+			<div class="row margin-bottom-40">
+				<!-- BEGIN SIDEBAR -->
+				<div class="sidebar col-md-3 col-sm-5">
+					<ul class="list-group margin-bottom-25 sidebar-menu">
+						<li th:each="type :${categoryList}"
+							th:class="${'list-group-item clearfix '+ (type.value.size()>0 ? 'dropdown':'')}">
+							<a href="javascript:void(0);"><i class="fa fa-angle-right"></i>
+								<th:block th:text="${type.key}"></th:block></a>
+							<ul class="dropdown-menu" style="padding-left: 32px">
+								<li class="list-group-item dropdown clearfix"
+									th:each="category: ${type.value}"><a
+									th:text="${category.name}"
+									th:href="@{/product-list(categoryId=${category.id})}">Shoes
+								</a></li>
+							</ul>
+						</li>
+
+					</ul>
+					<div class="sidebar-products clearfix">
+						<h2>Bestsellers</h2>
+						<div class="item">
+							<a href="#"><img
+								th:src="@{/assets/pages/img/products/k1.jpg}"
+								alt="Some Shoes in Animal with Cut Out"></a>
+							<h3>
+								<a href="#">Some Shoes in Animal with Cut Out</a>
+							</h3>
+							<div class="price">$31.00</div>
+						</div>
+						<div class="item">
+							<a href="#"><img
+								th:src="@{/assets/pages/img/products/k4.jpg}"
+								alt="Some Shoes in Animal with Cut Out"></a>
+							<h3>
+								<a href="#">Some Shoes in Animal with Cut Out</a>
+							</h3>
+							<div class="price">$23.00</div>
+						</div>
+						<div class="item">
+							<a href="#"><img
+								th:src="@{/assets/pages/img/products/k3.jpg}"
+								alt="Some Shoes in Animal with Cut Out"></a>
+							<h3>
+								<a href="#">Some Shoes in Animal with Cut Out</a>
+							</h3>
+							<div class="price">$86.00</div>
+						</div>
+					</div>
+				</div>
+				<!-- END SIDEBAR -->
+
+				<!-- BEGIN CONTENT -->
+				<div class="col-md-9 col-sm-7">
+					<div class="product-page">
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="product-main-image">
+									<img th:src="${product.image}"
+										alt="Cool green dress with red bell" class="img-responsive"
+										th:data-BigImgsrc="${product.image}">
+								</div>
+								<div class="product-other-images">
+									<a th:href="${product.image}" class="fancybox-button"
+										rel="photos-lib"><img alt="Berry Lace Dress"
+										th:src="${product.image}"></a> <a th:href="${product.image}"
+										class="fancybox-button" rel="photos-lib"><img
+										alt="Berry Lace Dress" th:src="${product.image}"></a> <a
+										th:href="${product.image}" class="fancybox-button"
+										rel="photos-lib"><img alt="Berry Lace Dress"
+										th:src="${product.image}"></a>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<h1 th:text="${product.title}">Cool green dress with red
+									bell</h1>
+								<div class="price-availability-block clearfix">
+									<div class="price">
+										<strong><th:block
+												th:text="${#numbers.formatInteger(product.salePrice,3,'COMMA')}">47.00</th:block><span>VND</span></strong>
+										<em style="padding-left: 10px"><span
+											th:text="${#numbers.formatInteger(product.originalPrice,3,'COMMA')}">62.00</span>VND</em>
+									</div>
+									<div class="availability">
+										Availability: <strong>In Stock</strong>
+									</div>
+								</div>
+								<div class="description">
+									<p th:utext="${product.description}"></p>
+								</div>
+								<form method="post" id="item-cart">
+									<div class="product-page-options">
+										<div class="pull-left"
+											th:each="optionName : ${product.optionsName}">
+											<label class="control-label" th:text="${optionName}">Size:</label>
+											<select name="optionIds" class="form-control input-sm">
+												<option th:each="opt : ${product.options}"
+													th:value="${opt.id}" th:text="${opt.name}"
+													th:if="${optionName==opt.feature}">L</option>
+											</select>
+										</div>
+									</div>
+									<p>
+										số lượng còn: <span id="span-quantity">4</span>
+									</p>
+									<input name="detailId" hidden="true">
+									<div class="product-page-cart">
+										<div class="product-quantity">
+											<input type="text" value="1" name="quantity"
+												class="form-control input-sm">
+										</div>
+										<button class="btn btn-primary" type="submit">Add to
+											cart</button>
+									</div>
+								</form>
+
+								<div class="review" th:object="${product}">
+									<input type="range" th:value="${product.rating}" step="0.25"
+										id="backing4" readonly="readonly">
+									<div class="rateit" data-rateit-backingfld="#backing4"
+										data-rateit-resetable="false" data-rateit-ispreset="true"
+										data-rateit-min="0" data-rateit-max="5"></div>
+									<a href="javascript:;" th:text="${product.rating}"></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
+										href="javascript:;">Write a review</a>
+								</div>
+								<ul class="social-icons">
+									<li><a class="facebook" data-original-title="facebook"
+										href="javascript:;"></a></li>
+									<li><a class="twitter" data-original-title="twitter"
+										href="javascript:;"></a></li>
+									<li><a class="googleplus" data-original-title="googleplus"
+										href="javascript:;"></a></li>
+									<li><a class="evernote" data-original-title="evernote"
+										href="javascript:;"></a></li>
+									<li><a class="tumblr" data-original-title="tumblr"
+										href="javascript:;"></a></li>
+								</ul>
+							</div>
+
+							<div class="product-page-content">
+								<ul id="myTab" class="nav nav-tabs">
+									<li><a href="#Description" data-toggle="tab">Description</a></li>
+									<li><a href="#Information" data-toggle="tab">Information</a></li>
+									<li class="active"><a href="#Reviews" data-toggle="tab"
+										th:text="${ratingList!=null ? 'Lượt đánh giá '+'('+ratingList.size()+')':0}">Reviews
+											(2)</a></li>
+								</ul>
+								<div id="myTabContent" class="tab-content">
+									<div class="tab-pane fade" id="Description">
+										<p th:text="${product.description}">Lorem ipsum dolor ut
+											sit ame dolore adipiscing elit, sed sit nonumy nibh sed
+											euismod laoreet dolore magna aliquarm erat sit volutpat
+											Nostrud duis molestie at dolore. Lorem ipsum dolor ut sit ame
+											dolore adipiscing elit, sed sit nonumy nibh sed euismod
+											laoreet dolore magna aliquarm erat sit volutpat Nostrud duis
+											molestie at dolore. Lorem ipsum dolor ut sit ame dolore
+											adipiscing elit, sed sit nonumy nibh sed euismod laoreet
+											dolore magna aliquarm erat sit volutpat Nostrud duis molestie
+											at dolore.</p>
+									</div>
+									<div class="tab-pane fade" id="Information">
+										<table class="datasheet">
+											<tr>
+												<th colspan="2">Additional features</th>
+											</tr>
+											<tr>
+												<td class="datasheet-features-type">Value 1</td>
+												<td>21 cm</td>
+											</tr>
+											<tr>
+												<td class="datasheet-features-type">Value 2</td>
+												<td>700 gr.</td>
+											</tr>
+											<tr>
+												<td class="datasheet-features-type">Value 3</td>
+												<td>10 person</td>
+											</tr>
+											<tr>
+												<td class="datasheet-features-type">Value 4</td>
+												<td>14 cm</td>
+											</tr>
+											<tr>
+												<td class="datasheet-features-type">Value 5</td>
+												<td>plastic</td>
+											</tr>
+										</table>
+									</div>
+									<div class="tab-pane fade in active" id="Reviews">
+
+										<!-- BEGIN FORM-->
+										<form method="POST" th:if="${orderId!=null}"
+											th:action="@{/rating/product/{id}(id=${product.id})}"
+											class="reviews-form margin-bottom-50" role="form">
+											<h2>Write a review</h2>
+											<input hidden="true" th:value="${orderId}" name="orderId">
+											<div class="form-group">
+												<label for="review">Review <span class="require">*</span></label>
+												<textarea class="form-control" name="comment" rows="8"
+													id="review"></textarea>
+											</div>
+											<div class="form-group">
+												<label for="email">Rating</label> <input type="range"
+													name="point" value="0" step="0.25" id="backing5">
+												<div class="rateit" data-rateit-backingfld="#backing5"
+													data-rateit-resetable="false" data-rateit-ispreset="true"
+													data-rateit-min="0" data-rateit-max="5"></div>
+											</div>
+											<div class="padding-top-20">
+												<button type="submit" class="btn btn-primary">Send</button>
+											</div>
+										</form>
+										<!-- END FORM-->
+										<!--<p>There are no reviews for this product.</p>-->
+										<div class="review-item clearfix"
+											th:each="rate : ${ratingList}">
+											<div class="review-item-submitted">
+												<strong th:text="${rate.customer.user.fullname}"></strong> <em
+													th:text="${#dates.format(rate.created, 'dd/MM/yy - HH:mm')}"></em>
+												<div class="rateit"
+													th:attr="data-rateit-value=${rate.point}"
+													data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+											</div>
+											<div class="review-item-content">
+												<p th:text="${rate.comment}"></p>
+											</div>
+										</div>
+
+										<a class="btn btn-default btn-more" href="#" role="button">more</a>
+									</div>
+								</div>
+							</div>
+
+							<div class="sticker sticker-sale"></div>
+						</div>
+
+					</div>
+				</div>
+				<!-- END CONTENT -->
+				<div class=" col-md-12 col-sm-12">
+					<div class="shop-banner" style="margin: 12px">
+						<div>
+							<img
+								style="border: 1px solid; width: 50px; height: 50px; border-radius: 50% !important; display: inline-block;"
+								th:src="@{${product.shopAvatar}}">
+							<h3
+								style="color: orange; cursor: pointer; display: inline-block;">
+								<a th:text="${product.shopName}"
+									th:href="@{/shop-detail/{id}(id=${product.shopId})}"></a>
+							</h3>
+						</div>
+						<div>
+							<h5>
+								<i class="fa fa-map-marker" aria-hidden="true"></i><span
+									style="text-transform: capitalize;"
+									th:text="${product.address + '  , '+ product.position.cityName}"></span>
+							</h5>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END SIDEBAR & CONTENT -->
+
+			<!-- BEGIN SIMILAR PRODUCTS -->
+			<div class="row margin-bottom-40">
+				<div class="col-md-12 col-sm-12">
+					<h2>Most popular products</h2>
+					<div class="owl-carousel owl-carousel4">
+						<div>
+							<div class="product-item">
+								<div class="pi-img-wrapper">
+									<img th:src="@{/assets/pages/img/products/k1.jpg}"
+										class="img-responsive" alt="Berry Lace Dress">
+									<div>
+										<a th:href="@{/assets/pages/img/products/k1.jpg}"
+											class="btn btn-default fancybox-button">Zoom</a> <a
+											href="#product-pop-up"
+											class="btn btn-default fancybox-fast-view">View</a>
+									</div>
+								</div>
+								<h3>
+									<a href="#">Berry Lace Dress</a>
+								</h3>
+								<div class="pi-price">$29.00</div>
+								<a href="javascript:;" class="btn btn-default add2cart">Add
+									to cart</a>
+								<div class="sticker sticker-new"></div>
+							</div>
+						</div>
+						<div>
+							<div class="product-item">
+								<div class="pi-img-wrapper">
+									<img th:src="@{/assets/pages/img/products/k2.jpg}"
+										class="img-responsive" alt="Berry Lace Dress">
+									<div>
+										<a th:href="@{/assets/pages/img/products/k2.jpg}"
+											class="btn btn-default fancybox-button">Zoom</a> <a
+											href="#product-pop-up"
+											class="btn btn-default fancybox-fast-view">View</a>
+									</div>
+								</div>
+								<h3>
+									<a href="#">Berry Lace Dress2</a>
+								</h3>
+								<div class="pi-price">$29.00</div>
+								<a href="javascript:;" class="btn btn-default add2cart">Add
+									to cart</a>
+							</div>
+						</div>
+						<div>
+							<div class="product-item">
+								<div class="pi-img-wrapper">
+									<img th:src="@{/assets/pages/img/products/k3.jpg}"
+										class="img-responsive" alt="Berry Lace Dress">
+									<div>
+										<a th:href="@{/assets/pages/img/products/k3.jpg}"
+											class="btn btn-default fancybox-button">Zoom</a> <a
+											href="#product-pop-up"
+											class="btn btn-default fancybox-fast-view">View</a>
+									</div>
+								</div>
+								<h3>
+									<a href="#">Berry Lace Dress3</a>
+								</h3>
+								<div class="pi-price">$29.00</div>
+								<a href="javascript:;" class="btn btn-default add2cart">Add
+									to cart</a>
+							</div>
+						</div>
+						<div>
+							<div class="product-item">
+								<div class="pi-img-wrapper">
+									<img th:src="@{/assets/pages/img/products/k4.jpg}"
+										class="img-responsive" alt="Berry Lace Dress">
+									<div>
+										<a th:href="@{/assets/pages/img/products/k4.jpg}"
+											class="btn btn-default fancybox-button">Zoom</a> <a
+											href="#product-pop-up"
+											class="btn btn-default fancybox-fast-view">View</a>
+									</div>
+								</div>
+								<h3>
+									<a href="#">Berry Lace Dress4</a>
+								</h3>
+								<div class="pi-price">$29.00</div>
+								<a href="javascript:;" class="btn btn-default add2cart">Add
+									to cart</a>
+								<div class="sticker sticker-sale"></div>
+							</div>
+						</div>
+						<div>
+							<div class="product-item">
+								<div class="pi-img-wrapper">
+									<img th:src="@{/assets/pages/img/products/k1.jpg}"
+										class="img-responsive" alt="Berry Lace Dress">
+									<div>
+										<a th:href="@{/assets/pages/img/products/k1.jpg}"
+											class="btn btn-default fancybox-button">Zoom</a> <a
+											href="#product-pop-up"
+											class="btn btn-default fancybox-fast-view">View</a>
+									</div>
+								</div>
+								<h3>
+									<a href="#">Berry Lace Dress5</a>
+								</h3>
+								<div class="pi-price">$29.00</div>
+								<a href="javascript:;" class="btn btn-default add2cart">Add
+									to cart</a>
+							</div>
+						</div>
+						<div>
+							<div class="product-item">
+								<div class="pi-img-wrapper">
+									<img th:src="@{/assets/pages/img/products/k2.jpg}"
+										class="img-responsive" alt="Berry Lace Dress">
+									<div>
+										<a th:href="@{/assets/pages/img/products/k2.jpg}"
+											class="btn btn-default fancybox-button">Zoom</a> <a
+											href="#product-pop-up"
+											class="btn btn-default fancybox-fast-view">View</a>
+									</div>
+								</div>
+								<h3>
+									<a href="#">Berry Lace Dress6</a>
+								</h3>
+								<div class="pi-price">$29.00</div>
+								<a href="javascript:;" class="btn btn-default add2cart">Add
+									to cart</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END SIMILAR PRODUCTS -->
+		</div>
+	</div>
+
+	<!-- BEGIN BRANDS -->
+	<div th:replace="fragment/app/brands.html :: brands"></div>
+	<!-- END BRANDS -->
+
+	<!-- BEGIN STEPS -->
+	<div th:replace="fragment/app/steps.html :: steps"></div>
+	<!-- END STEPS -->
+
+
+	<!-- BEGIN FOOTER -->
+	<div th:replace="fragment/app/footer.html :: footer"></div>
+	<!-- FOOTER END -->
+
+	<!-- BEGIN fast view of a product -->
+	<div id="product-pop-up" style="display: none; width: 700px;">
+		<div class="product-page product-pop-up">
+			<div class="row">
+				<div class="col-md-6 col-sm-6 col-xs-3">
+					<div class="product-main-image">
+						<img th:src="@{/assets/pages/img/products/model7.jpg}"
+							alt="Cool green dress with red bell" class="img-responsive">
+					</div>
+					<div class="product-other-images">
+						<a href="javascript:;" class="active"><img
+							alt="Berry Lace Dress"
+							th:src="@{/assets/pages/img/products/model3.jpg}"></a> <a
+							href="javascript:;"><img alt="Berry Lace Dress"
+							th:src="@{/assets/pages/img/products/model4.jpg}"></a> <a
+							href="javascript:;"><img alt="Berry Lace Dress"
+							th:src="@{/assets/pages/img/products/model5.jpg}"></a>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-9">
+					<h2>Cool green dress with red bell</h2>
+					<div class="price-availability-block clearfix">
+						<div class="price">
+							<strong><span>$</span>47.00</strong> <em>$<span>62.00</span></em>
+						</div>
+						<div class="availability">
+							Availability: <strong>In Stock</strong>
+						</div>
+					</div>
+					<div class="description">
+						<p>Lorem ipsum dolor ut sit ame dolore adipiscing elit, sed
+							nonumy nibh sed euismod laoreet dolore magna aliquarm erat
+							volutpat Nostrud duis molestie at dolore.</p>
+					</div>
+					<div class="product-page-options">
+						<div class="pull-left">
+							<label class="control-label">Size:</label> <select
+								class="form-control input-sm">
+								<option>L</option>
+								<option>M</option>
+								<option>XL</option>
+							</select>
+						</div>
+						<div class="pull-left">
+							<label class="control-label">Color:</label> <select
+								class="form-control input-sm">
+								<option>Red</option>
+								<option>Blue</option>
+								<option>Black</option>
+							</select>
+						</div>
+					</div>
+					<div class="product-page-cart">
+						<div class="product-quantity">
+							<input id="product-quantity2" type="text" value="1" readonly
+								class="form-control input-sm">
+						</div>
+						<button class="btn btn-primary" type="submit">Add to cart</button>
+						<a href="#" class="btn btn-default">More details</a>
+					</div>
+				</div>
+
+				<div class="sticker sticker-sale"></div>
+			</div>
+		</div>
+	</div>
+	<!-- END fast view of a product -->
+
+	<!-- Load javascripts at bottom, this will reduce page load time -->
+	<!-- BEGIN CORE PLUGINS(REQUIRED FOR ALL PAGES) -->
+	<!--[if lt IE 9]>
+    <script src="assets/plugins/respond.min.js"></script>  
+    <![endif]-->
+	<script th:src="@{/assets/plugins/jquery.min.js}"
+		type="text/javascript"></script>
+	<script th:src="@{/assets/plugins/jquery-migrate.min.js}"
+		type="text/javascript"></script>
+	<script th:src="@{/assets/plugins/bootstrap/js/bootstrap.min.js}"
+		type="text/javascript"></script>
+	<script th:src="@{/assets/corporate/scripts/back-to-top.js}"
+		type="text/javascript"></script>
+	<script
+		th:src="@{/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js}"
+		type="text/javascript"></script>
+	<!-- END CORE PLUGINS -->
+
+	<!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
+	<script
+		th:src="@{/assets/plugins/fancybox/source/jquery.fancybox.pack.js}"
+		type="text/javascript"></script>
+	<!-- pop up -->
+	<script th:src="@{/assets/plugins/owl.carousel/owl.carousel.min.js}"
+		type="text/javascript"></script>
+	<!-- slider for products -->
+	<script th:src="@{/assets/plugins/zoom/jquery.zoom.min.js}"
+		type="text/javascript"></script>
+	<!-- product zoom -->
+	<script
+		th:src="@{/assets/plugins/bootstrap-touchspin/bootstrap.touchspin.js}"
+		type="text/javascript"></script>
+	<!-- Quantity -->
+	<script th:src="@{/assets/plugins/uniform/jquery.uniform.min.js}"
+		type="text/javascript"></script>
+	<script th:src="@{/assets/plugins/rateit/src/jquery.rateit.js}"
+		type="text/javascript"></script>
+
+	<script th:src="@{/assets/corporate/scripts/layout.js}"
+		type="text/javascript"></script>
+	<script type="text/javascript" th:src="@{/assets/js/pages/cart.js}"></script>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+
+		let details = /*[[${product.detailList}]]*/
+		console.log(details)
+
+		/*]]>*/
+	</script>
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			Layout.init();
+			Layout.initOWL();
+			Layout.initTwitter();
+			Layout.initImageZoom();
+			Layout.initTouchspin();
+			Layout.initUniform();
+		});
+		console.log(details)
+		function loadDataItemCart(){
+			var selectedOptions=$("select[name=optionIds] option:selected").map(function() {
+				return Number($(this).val())
+			}).get();
+			detail=details.find((detail)=>{
+				return detail.options.every((option)=>selectedOptions.includes(option.id))
+			})
+			$("input[name=detailId]").val(detail.id)
+			console.log($("input[name=detailId]").val())
+			$("#span-quantity").text(detail.quantity)
+		}
+		loadDataItemCart();
+		$("select[name=optionIds]").change(function() {
+			loadDataItemCart();
+			
+		});
+	</script>
+	<!-- END PAGE LEVEL JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

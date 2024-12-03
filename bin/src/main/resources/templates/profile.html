@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<!--
+Template: Metronic Frontend Freebie - Responsive HTML Template Based On Twitter Bootstrap 3.3.4
+Version: 1.0.0
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Like: www.facebook.com/keenthemes
+Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+-->
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!--<![endif]-->
+
+<!-- Head BEGIN -->
+<head>
+<meta charset="utf-8">
+<title>Metronic Shop UI</title>
+
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<meta content="Metronic Shop UI description" name="description">
+<meta content="Metronic Shop UI keywords" name="keywords">
+<meta content="keenthemes" name="author">
+
+<meta property="og:site_name" content="-CUSTOMER VALUE-">
+<meta property="og:title" content="-CUSTOMER VALUE-">
+<meta property="og:description" content="-CUSTOMER VALUE-">
+<meta property="og:type" content="website">
+<meta property="og:image" content="-CUSTOMER VALUE-">
+<!-- link to image for socio -->
+<meta property="og:url" content="-CUSTOMER VALUE-">
+
+<link rel="shortcut icon" href="favicon.ico">
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Global styles START -->
+<link th:href="@{/assets/plugins/font-awesome/css/font-awesome.min.css}"
+	rel="stylesheet">
+<link th:href="@{/assets/plugins/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet">
+<!-- Global styles END -->
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> -->
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+<link rel="stylesheet"
+	th:href="@{/assets/corporate/css/extend/profile.css}">
+<!-- <script src="assets/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>    -->
+<!-- Theme styles START -->
+
+<!-- Theme styles END -->
+</head>
+<!-- Head END -->
+
+<!-- Body BEGIN -->
+<body class="ecommerce">
+	<div class="container emp-profile">
+		<form method="post">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="profile-img">
+						<img
+							src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
+							alt="" /> <a class="file btn btn-lg btn-primary"> Change
+							Photo <input type="file" name="file" />
+						</a>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="profile-head">
+						<h5 th:text="${user.fullname}"></h5>
+
+						<h6 sec:authorize="!hasRole('SHOP')">Khách Hàng</h6>
+						<h6 sec:authorize="hasRole('SHOP')">Cửa Hàng</h6>
+						<p class="proile-rating">
+							Điểm: <span>100/1000</span>
+						</p>
+						<ul class="nav nav-tabs" id="myTab" role="tablist">
+							<li class="nav-item"><a class="nav-link active"
+								id="home-tab" data-toggle="tab" href="#home" role="tab"
+								aria-controls="home" aria-selected="true">About</a></li>
+							<li class="nav-item"><a class="nav-link" id="profile-tab"
+								data-toggle="tab" href="#profile" role="tab"
+								aria-controls="profile" aria-selected="false">Timeline</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<a sec:authorize="!hasRole('SHOP')"
+						class="btn btn-link profile-edit-btn" th:href="@{/home}">Đăng
+						kí cửa hàng</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4 col-sm-5 col-xs-12">
+					<div class="profile-work">
+						<a class="btn btn-link" th:href="@{/home}">Trang chủ</a><br /> <a
+							class="btn btn-link" href="">Đơn hàng đang giao</a><br /> <a
+							class="btn btn-link" href="">Đơn hàng đã mua</a><br /> <a
+							class="btn btn-link" th:href="@{/logout}">Đăng xuất</a>
+					</div>
+				</div>
+				<div class="col-md-8 col-sm-7 col-xs-12">
+					<div class="tab-content profile-tab" id="myTabContent">
+						<div class="tab-pane fade active in" id="home" role="tabpanel"
+							aria-labelledby="home-tab">
+							<div class="row">
+								<div class="col-md-6">
+									<label>User Id</label>
+								</div>
+								<div class="col-md-6">
+									<p th:text="${user.userId}">Kshiti123</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<label>Name</label>
+								</div>
+								<div class="col-md-6">
+									<p th:text="${user.fullname}">Kshiti Ghelani</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<label>Email</label>
+								</div>
+								<div class="col-md-6">
+									<p th:text="${user.email}">kshitighelani@gmail.com</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<label>Phone</label>
+								</div>
+								<div class="col-md-6">
+									<p th:text="${user.phone}">123 456 7890</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<label>Profession</label>
+								</div>
+								<div class="col-md-6">
+									<p>Web Developer and Designer</p>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="profile" role="tabpanel"
+							aria-labelledby="profile-tab">
+							<form th:action="@{/user/profile}" method="post"
+								th:object="${user}">
+								<div class="form-group row">
+									<label for="staticEmail"
+										class="col-sm-6 col-form-label text-primary">Thông Tin</label>
+								</div>
+								<div class="form-group row">
+									<label for="staticEmail" class="col-sm-2 col-form-label">Họ
+										và Tên</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="staticEmail"
+											th:field="*{fullname}" />
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="inputPassword" class="col-sm-2 col-form-label">Email</label>
+									<div class="col-sm-10">
+										<input type="email" class="form-control" id="inputPassword"
+											th:field="*{email}">
+									</div>
+								</div>
+							</form>
+							<form th:action="@{/user/profile}" method="post"
+								th:object="${user}">
+								<div class="form-group row">
+									<label for="staticEmail"
+										class="col-sm-6 col-form-label text-primary">Thay đổi
+										mật khẩu</label>
+								</div>
+								<div class="form-group row">
+									<label for="inputPassword" class="col-sm-2 col-form-label">Mật
+										khẩu</label>
+									<div class="col-sm-10">
+										<input type="password" class="form-control" id="inputPassword"
+											placeholder="Mật khẩu mới"/>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="inputPassword" class="col-sm-2 col-form-label">Xác
+										nhận mật khẩu</label>
+									<div class="col-sm-10">
+										<input type="password" class="form-control" id="inputPassword"
+											placeholder="Xác nhận mật khẩu"/>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- Load javascripts at bottom, this will reduce page load time -->
+	<!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+	<!--[if lt IE 9]>
+    <script src="assets/plugins/respond.min.js"></script>  
+    <![endif]-->
+	<script th:src="@{/assets/plugins/jquery.min.js}"
+		type="text/javascript"></script>
+	<script th:src="@{/assets/plugins/bootstrap/js/bootstrap.min.js}"
+		type="text/javascript"></script>
+
+</body>
+<!-- END BODY -->
+</html>

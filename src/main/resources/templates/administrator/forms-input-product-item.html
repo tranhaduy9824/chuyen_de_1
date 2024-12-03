@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html lang="en" class="material-style layout-fixed"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<title>Empire | B4+ admin template by Srthemesvilla</title>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="description"
+	content="Empire Bootstrap admin template made using Bootstrap 4, it has tons of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
+<meta name="keywords"
+	content="Empire, bootstrap admin template, bootstrap admin panel, bootstrap 4 admin template, admin template">
+<meta name="author" content="Srthemesvilla" />
+<link rel="icon" type="image/x-icon"
+	th:href="@{/assets/img/favicon.ico}">
+
+<!-- Google fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
+	rel="stylesheet">
+
+<!-- Icon fonts -->
+<link rel="stylesheet" th:href="@{/assets/fonts/fontawesome.css}">
+<link rel="stylesheet" th:href="@{/assets/fonts/ionicons.css}">
+<link rel="stylesheet" th:href="@{/assets/fonts/linearicons.css}">
+<link rel="stylesheet" th:href="@{/assets/fonts/open-iconic.css}">
+<link rel="stylesheet" th:href="@{/assets/fonts/pe-icon-7-stroke.css}">
+<link rel="stylesheet" th:href="@{/assets/fonts/feather.css}">
+
+<!-- Core stylesheets -->
+<link rel="stylesheet" th:href="@{/assets/css/bootstrap-material.css}">
+<link rel="stylesheet" th:href="@{/assets/css/shreerang-material.css}">
+<link rel="stylesheet" th:href="@{/assets/css/uikit.css}">
+
+<!-- Libs -->
+<link rel="stylesheet"
+	th:href="@{/assets/libs/perfect-scrollbar/perfect-scrollbar.css}">
+</head>
+
+<body>
+	<!-- [ Preloader ] Start -->
+	<div class="page-loader">
+		<div class="bg-primary"></div>
+	</div>
+	<!-- [ Preloader ] End -->
+
+	<!-- [ Layout wrapper ] Start -->
+	<div class="layout-wrapper layout-2">
+		<div class="layout-inner">
+			<!-- [ Layout sidenav ] Start -->
+			<div th:replace="fragment/admin/menu.html :: menu"></div>
+			<!-- [ Layout sidenav ] End -->
+			<!-- [ Layout container ] Start -->
+			<div class="layout-container">
+				<!-- [ Layout navbar ( Header ) ] Start -->
+				<div th:replace="fragment/admin/nav-header.html :: header"></div>
+				<!-- [ Layout navbar ( Header ) ] End -->
+				<div class="layout-content">
+
+					<!-- [ content ] Start -->
+					<div class="container-fluid flex-grow-1 container-p-y">
+						<h4 class="font-weight-bold py-3 mb-0">Chi tiết sản phẩm</h4>
+
+						<div class="card mb-4">
+							<h6 class="card-header">Form Product Item</h6>
+							<div class="card-body">
+
+								<form
+									th:action="${productItem.id !=null ? '/update-productItem':'/add-productItem'}"
+									th:object="${productItem}" method="post">
+									<div class="form-group" style="display: none">
+										<label class="form-label">ID</label> <input type="text"
+											class="form-control" placeholder="ID" th:field="*{id}"
+											hidden="true" readonly>
+										<div class="clearfix"></div>
+									</div>
+									<div class="row">
+										<div class="form-group  col-sm-12 col-md-12">
+											<label class="form-label">Tiêu đề</label> <input type="text"
+												class="form-control" placeholder="Title" th:field="*{title}">
+											<div class="clearfix"></div>
+										</div>
+										<div class="form-group  col-sm-12 col-md-12">
+											<label class="form-label">Mô tả</label>
+											<textarea type="text" class="form-control"
+												placeholder="Description" th:field="*{description}" rows="5"
+												maxlength="1000"></textarea>
+											<div class="clearfix"></div>
+										</div>
+										<div class="form-group  col-sm-6 col-md-6">
+											<label class="form-label">Giá gốc</label> <input type="text"
+												class="form-control" placeholder="OriginalPrice"
+												th:field="*{originalPrice}">
+											<div class="clearfix"></div>
+										</div>
+										<div class="form-group col-sm-6 col-md-6">
+											<label class="form-label">Giá giảm</label> <input type="text"
+												class="form-control" placeholder="SalePrice"
+												th:field="*{salePrice}">
+											<div class="clearfix"></div>
+										</div>
+
+										<div class="form-group  col-sm-12 col-md-12">
+											<label class="form-label">Hình minh hoạ</label> <img
+												th:if="${productItem.image != null}"
+												th:src="${productItem.image}" style="max-width: 200px;">
+											<input type="url" class="form-control" placeholder="Image"
+												name="myFile" id="myFile" th:field="*{image}">
+											<div class="clearfix"></div>
+										</div>
+										<div class="form-group  col-sm-12 col-md-12">
+											<label class="form-label">Phân loại</label>
+											<div class="clearfix"></div>
+										</div>
+
+										<div class="form-group  col-sm-6 col-md-6"
+											style="display: none;">
+											<label class="form-label">ID SHOP</label> <input type="text"
+												class="form-control" placeholder="ID" th:field="*{shopId}"
+												readonly>
+											<div class="clearfix"></div>
+										</div>
+										<div class="form-group  col-sm-6 col-md-4">
+											<label class="form-label">Thẻ sản phẩm: </label> <select
+												class="form-control" th:field="*{tagId}">
+												<option th:each="tag : ${productTags}" th:value="${tag.id}"
+													th:text="${tag.tagName}"></option>
+											</select>
+											<div class="clearfix"></div>
+										</div>
+										<div class="form-group  col-sm-6 col-md-4">
+											<label class="form-label">Thể loại: </label> <select
+												class="form-control" th:field="*{categoryId}">
+												<option th:each="category : ${categories}"
+													th:value="${category.id}" th:text="${category.name}"></option>
+											</select>
+											<div class="clearfix"></div>
+										</div>
+										<div class="form-group  col-sm-6 col-md-4">
+											<label class="form-label">Áp dụng voucher</label> <select
+												class="form-control" th:field="*{scope}">
+												<option
+													th:each="scope : ${T(com.ppl2.smartshop.entities.datatypes.constrains.ScopeVoucher).values()}"
+													th:value="${scope}" th:text="${scope}"></option>
+											</select>
+											<div class="clearfix"></div>
+										</div>
+										<div class="form-group  col-sm-12 col-md-12"
+											th:if="${productItem.id==null}">
+											<label class="form-label">Những lựa chọn</label>
+											<button id="btn-options" type="button"
+												class="btn btn-outline-success ml-3">
+												<i class="feather icon-plus"></i> Thêm lựa chọn
+											</button>
+											<div class="clearfix"></div>
+										</div>
+										<div class="form-group col-sm-12" id="options-container"
+											th:if="${productItem.id==null}">
+											</div>
+									</div>
+
+									<button type="submit" class="btn btn-primary">Xác nhận
+										thay đổi</button>
+									<a class="btn btn-info" th:href="@{/shop/store-product/{id}(id=${productItem.id})}">Quản lí kho hàng</a> <a class="btn btn-warning"
+										th:href="@{/shop/manageProductItems}">Quay trở lại</a>
+								</form>
+							</div>
+						</div>
+						<div id="message" th:if="${message!=null && message.status==true}"
+							class="alert alert-dark-success alert-dismissible fade show">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							[[${message.message}]]
+						</div>
+						<div id="message"
+							th:if="${message!=null && message.status==false}"
+							class="alert alert-dark-danger alert-dismissible fade show">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							[[${message.message}]]
+						</div>
+						<!-- [ content ] Start -->
+
+						<div class="container-fluid flex-grow-1 container-p-y"
+							th:if="${productItem.optionsName!=null && productItem.optionsName.size()!=0}">
+							<h4 class="font-weight-bold py-3 mb-0">Quản lí những lựa
+								chọn cho sản phẩm</h4>
+							<form th:action="@{/shop/options/add}" method="post">
+								<div class="form-row">
+									<div class="form-group col-sm-6 col-md-4 col-lg-4">
+										<label for="feature">Tên lựa chọn </label>
+										<div class="input-group">
+											<select name="feature" class="custom-select flex-grow-1">
+												<option th:each="optionName : ${productItem.optionsName}"
+													th:text="${optionName}" th:value="${optionName}"></option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group col-sm-6 col-md-4 col-lg-4">
+										<label for="name">Giá trị lựa chọn</label> <input name="name"
+											type="text" class="form-control"
+											aria-describedby="categoryHelp"
+											placeholder="lựa chọn ( ví dụ: 'XL', 'cam','đỏ', ...)">
+									</div>
+									<input name="productId" th:value="${productItem.id}"
+										hidden="true">
+									<div class="col-md-4 col-lg-4">
+										<button type="submit" class="btn btn-outline-success">
+											<i class="feather icon-plus"></i> Tạo
+										</button>
+									</div>
+								</div>
+							</form>
+							<div id="accordion">
+								<ul class="nav nav-tabs" id="myTab" role="tablist">
+									<li class="nav-item" role="presentation"
+										th:each="type,iter : ${productItem.optionsName}">
+										<button
+											th:class="${'btn nav-link '+ (iter.first ? 'active':'')}"
+											th:id="${'category-tab-'+iter.index}" data-toggle="tab"
+											th:data-target="${'#category-'+iter.index}" type="button"
+											role="tab" th:aria-controls="${'category-'+iter.index}"
+											th:aria-selected="${iter.first}" th:text="${type}">Home</button>
+									</li>
+
+								</ul>
+								<div class="tab-content" id="myTabContent">
+									<div
+										th:class="${'tab-pane fade ' + (iter.first ? 'show active':'')}"
+										th:id="${'category-'+iter.index}" role="tabpanel"
+										th:each="feature,iter : ${productItem.optionsName}"
+										th:aria-labelledby="${'category-tab-'+iter.index}">
+										<div class="card-body">
+											<form action="/shop/options/update-feature" method="post">
+												<div class="form-row">
+													<div class="form-group">
+														<label th:for="${'category-'+iter.index}">Tên loại
+															sản phẩm</label> <input type="text" class="form-control"
+															th:value="${feature}" aria-describedby="categoryHelp"
+															name="newFeature" placeholder="Nhập loại sản phẩm mới"
+															required><input type="text" class="form-control"
+															th:value="${feature}" aria-describedby="categoryHelp"
+															name="oldFeature" placeholder="Nhập loại sản phẩm mới"
+															hidden="true"> <small id="categoryHelp"
+															class="form-text text-muted">Điều này sẽ làm thay
+															đổi toàn bộ thể loại sản phẩm phẩm bên dưới.</small>
+													</div>
+													<input name="productId" th:value="${productItem.id}"
+														hidden="true">
+													<div class="col-md-6">
+														<button type="submit" class="btn btn-primary">
+															<i class='feather icon-save'></i> Cập nhật
+														</button>
+													</div>
+												</div>
+											</form>
+											<button class="btn btn-outline-info mr-2 my-2 btn-categories"
+												th:each="option: ${productItem.options}"
+												th:data-option="${option.name}"
+												th:data-category-id="${option.id}"
+												th:data-feature="${option.feature}"
+												th:data-category-index="${iter.index}"
+												th:if="${option.feature==feature}" th:text="${option.name}">Máy
+												tính bảng</button>
+											<form th:action="@{/shop/options/update}" method="post">
+												<input name="productId" th:value="${productItem.id}"
+													hidden="true">
+												<div th:id="${'form-category-'+iter.index}"></div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+					</div>
+					<!-- [ content ] End -->
+
+					<!-- [ Layout footer ] Start -->
+					<nav class="layout-footer footer bg-white">
+						<div
+							class="container-fluid d-flex flex-wrap justify-content-between text-center container-p-x pb-3">
+							<div class="pt-3">
+								<span class="footer-text font-weight-semibold">&copy; <a
+									href="https://srthemesvilla.com" class="footer-link"
+									target="_blank">Srthemesvilla</a></span>
+							</div>
+							<div>
+								<a href="javascript:" class="footer-link pt-3">About Us</a> <a
+									href="javascript:" class="footer-link pt-3 ml-4">Help</a> <a
+									href="javascript:" class="footer-link pt-3 ml-4">Contact</a> <a
+									href="javascript:" class="footer-link pt-3 ml-4">Terms
+									&amp; Conditions</a>
+							</div>
+						</div>
+					</nav>
+					<!-- [ Layout footer ] End -->
+
+				</div>
+				<!-- [ Layout content ] Start -->
+
+			</div>
+			<!-- [ Layout container ] End -->
+
+		</div>
+
+		<!-- Overlay -->
+		<div class="layout-overlay layout-sidenav-toggle"></div>
+	</div>
+	<!-- [ Layout wrapper ] end -->
+
+	<!-- Core scripts -->
+	<script th:src="@{/assets/js/pace.js}"></script>
+	<script th:src="@{/assets/js/jquery-3.3.1.min.js}"></script>
+	<script th:src="@{/assets/libs/popper/popper.js}"></script>
+	<script th:src="@{/assets/js/bootstrap.js}"></script>
+	<script th:src="@{/assets/js/sidenav.js}"></script>
+	<script th:src="@{/assets/js/layout-helpers.js}"></script>
+	<script th:src="@{/assets/js/material-ripple.js}"></script>
+
+	<!-- Libs -->
+	<script th:src="@{/assets/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
+
+	<!-- Demo -->
+	<script th:src="@{/assets/js/demo.js}"></script>
+	<script th:src="@{/assets/js/analytics.js}"></script>
+	<script>
+    $('.btn-categories').click((e) => {
+        let element = $(e.target)
+
+        $("#form-category-" + element.data("categoryIndex") ).empty()
+
+        option = element.data('option')
+		feature =element.data('feature')
+        let div = $("<div class=\"form-row\">\r\n   </div>")
+
+		div.append("<div class=\"form-group col-sm-6 col-md-4 col-lg-4\">   <input name='name' type=\"text\" class=\"form-control\" id=\"category\"\r\n  value=\"" + option + "\" aria-describedby=\"categoryHelp\" placeholder=\"tên lựa chọn\" required>\r\n</div>")
+		div.append("<div class=\"form-group col-sm-6 col-md-4 col-lg-4\">   <input name='feature' type=\"text\" class=\"form-control\"    hiddent='true' hidden='true'   value=\"" + feature + "\" aria-describedby=\"categoryHelp\" placeholder=\"tên lựa chọn\" required>\r\n</div>")
+
+        div.append("<input name='optionId' value='"+element.data('categoryId') +"' hidden='true'/>")
+        div.append("<div class=\"col-md-6\">\r\n   <button type=\"submit\" class=\"btn btn-primary\"><i class='feather icon-save'></i> Cập nhật</button>\r\n<button type=\"button\" class=\"btn btn-outline-danger ml-5\" data-form=\"#form-category-"+ element.data("categoryIndex")+ " \"  onclick=\"removeForm(this)\">Hủy</button></div>")
+
+        $("#form-category-" + element.data("categoryIndex")).append("<h5>Cập nhật lựa chọn của sản phẩm</h5>")
+        $("#form-category-" + element.data("categoryIndex")).append(div)
+    })
+	function removeForm(e){
+    	 $($(e).data('form')).empty()
+    }
+    $("#btn-options").on("click",(e)=>{
+    	$("#options-container").append('<input type="text" class="form-control col-sm-4" placeholder="Tên lựa chọn" id="optionsName" name="optionsName" value="">')
+    })
+    	</script>
+
+</body>
+
+</html>

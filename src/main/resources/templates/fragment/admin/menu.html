@@ -1,0 +1,125 @@
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="menu"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<div id="layout-sidenav"
+		class="layout-sidenav sidenav sidenav-vertical bg-white logo-dark">
+		<!-- Brand demo (see /assets/css/demo/demo.css) -->
+		<div class="app-brand demo">
+			<span class="app-brand-logo demo"> <img
+				th:src="@{/assets/img/logo.png}" alt="Brand Logo" class="img-fluid">
+			</span> <a sec:authorize="hasRole('ADMIN')"
+				th:href="@{/admin/home}"
+				class="app-brand-text demo sidenav-text font-weight-normal ml-2">SmartShop</a>
+				<a sec:authorize="hasRole('SHOP')" th:href="@{/shop/home}"
+				class="app-brand-text demo sidenav-text font-weight-normal ml-2">SmartShop</a>
+			<a href="javascript:"
+				class="layout-sidenav-toggle sidenav-link text-large ml-auto"> <i
+				class="ion ion-md-menu align-middle"></i>
+			</a>
+		</div>
+		<div class="sidenav-divider mt-0"></div>
+
+		<!-- Links -->
+		<ul class="sidenav-inner py-1">
+
+			<!-- Dashboards -->
+			<li class="sidenav-item"><a sec:authorize="hasRole('ADMIN')"
+				th:href="@{/admin/home}" class="sidenav-link"> <i
+					class="sidenav-icon feather icon-home"></i>
+					<div>Trang chủ admin</div>
+					<div class="pl-1 ml-auto">
+						<div class="badge badge-danger">Hot</div>
+					</div>
+			</a> <a sec:authorize="hasRole('SHOP')" th:href="@{/shop/home}"
+				class="sidenav-link"> <i class="sidenav-icon feather icon-home"></i>
+					<div>Trang chủ cửa hàng</div>
+					<div class="pl-1 ml-auto">
+						<div class="badge badge-danger">Hot</div>
+					</div>
+			</a></li>
+			<th:block sec:authorize="hasRole('ADMIN')">
+				<!-- Layouts -->
+				<li class="sidenav-divider mb-1"></li>
+				<li class="sidenav-header small font-weight-semibold">Quản lí
+					người dùng</li>
+				<li class="sidenav-item"><a th:href="@{/admin/manage-account}"
+					class="sidenav-link"> <i class="sidenav-icon feather icon-type"></i>
+						<div>Tài khoản</div>
+				</a></li>
+			</th:block>
+			<!-- Forms & Tables -->
+			<li class="sidenav-divider mb-1"></li>
+			<li class="sidenav-header small font-weight-semibold">Quản lí
+				đơn hàng</li>
+			<li class="sidenav-item"><a href="javascript:"
+				class="sidenav-link sidenav-toggle"> <i
+					class="sidenav-icon feather icon-clipboard"></i>
+					<div>Thống kê tài chính</div>
+			</a>
+				<ul class="sidenav-menu">
+					<li class="sidenav-item" sec:authorize="hasRole('ADMIN')"><a
+						href="forms_layouts.html" class="sidenav-link">
+							<div>Tiền lợi nhuận</div>
+					</a></li>
+					<li class="sidenav-item" sec:authorize="hasRole('ADMIN')"><a
+						href="forms_input-groups.html" class="sidenav-link">
+							<div>Chi phí</div>
+					</a></li>
+					<li class="sidenav-item" sec:authorize="hasRole('SHOP')"><a
+						th:href="@{/shop/finance}" class="sidenav-link">
+							<div>Tiền đơn hàng</div>
+					</a></li>
+				</ul></li>
+			<li class="sidenav-item active" sec:authorize="hasRole('ADMIN')"><a
+				th:href="@{/admin/orders}" class="sidenav-link"> <i
+					class="sidenav-icon feather icon-package"></i>
+					<div>Trạng thái đơn hàng</div>
+			</a></li>
+			<li class="sidenav-item active" sec:authorize="hasRole('SHOP')"><a
+				th:href="@{/shop/orders}" class="sidenav-link"> <i
+					class="sidenav-icon feather icon-package"></i>
+					<div>Trạng thái đơn hàng</div>
+			</a></li>
+			<th:block sec:authorize="hasRole('SHOP')">
+				<li class="sidenav-divider mb-1"></li>
+				<li class="sidenav-header small font-weight-semibold">Quản lí
+					cửa hàng</li>
+				<li class="sidenav-item"><a th:href="@{/shop/information}"
+					class="sidenav-link"> <i class="lnr lnr-home"></i>
+						<div style="margin-left: 16px;">Thông tin cửa hàng</div>
+				</a></li>
+				<li class="sidenav-item"><a
+					th:href="@{/shop/manageProductItems}" class="sidenav-link"> <i
+						class="feather icon-package"></i>
+						<div style="margin-left: 16px;">Sản phẩm</div>
+				</a></li>
+				<li class="sidenav-item"><a th:href="@{/shop/manageTags}"
+					class="sidenav-link"> <i class="feather icon-layers"></i>
+						<div style="margin-left: 16px;">Phân loại sản phẩm</div>
+				</a></li>
+				<li class="sidenav-item"><a th:href="@{/shop/store-product}"
+					class="sidenav-link"> <i class="feather icon-server"></i>
+						<div style="margin-left: 16px;">Quản lí kho hàng</div>
+				</a></li>
+
+			</th:block>
+			<li class="sidenav-header small font-weight-semibold" sec:authorize="hasRole('ADMIN')">Phân loại</li>
+			<li class="sidenav-item" sec:authorize="hasRole('ADMIN')"><a
+				th:href="@{/admin/manage-category}" class="sidenav-link"> <i
+					class="feather icon-grid"></i>
+					<div style="margin-left: 16px;">Quản lí mặt hàng</div>
+			</a></li>
+			<li class="sidenav-header small font-weight-semibold">Điều hướng</li>
+			<li class="sidenav-item" sec:authorize="hasRole('SHOP')"><a
+				th:href="@{/shop/manage}" class="sidenav-link"> <i
+					class="lnr lnr-store"></i>
+					<div style="margin-left: 16px;">Cửa hàng</div>
+			</a></li>
+			<li class="sidenav-item"><a th:href="@{/logout}"
+				class="sidenav-link"> <i class="feather icon-log-out"></i>
+					<div style="margin-left: 16px;">Đăng xuất</div>
+			</a></li>
+		</ul>
+	</div>
+
+
+</th:block>

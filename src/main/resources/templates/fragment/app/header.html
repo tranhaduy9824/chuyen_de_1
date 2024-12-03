@@ -1,0 +1,54 @@
+<th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:fragment="header">
+    <div class="header">
+      <div class="container">
+        <a class="site-logo" th:href="@{/home}"><img th:src="@{/assets/corporate/img/logos/logo-shop-red.png}" alt="Metronic Shop UI"></a>
+
+        <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+        <!-- BEGIN CART -->
+        <div class="top-cart-block">
+          <div class="top-cart-info">
+            <a th:href="@{/cart}" class="top-cart-info-count" sec:authorize="hasRole('ROLE_CUSTOMER')"
+              th:text="${session.sizeCart+' sản phẩm'}">3 items</a>
+            <a th:href="@{/cart}" sec:authorize="!isAuthenticated()">Giỏ hàng</a>
+          </div>
+          <i class="fa fa-shopping-cart"></i>
+                        
+        </div>
+        <!--END CART -->
+
+        <!-- BEGIN NAVIGATION -->
+        <div class="header-navigation">
+          <ul>
+          
+            
+            <li><a th:href="@{/product-list}">Sản phẩm</a></li>
+			<li><a th:href="@{/contact}">Liên hệ</a></li>
+			<li><a th:href="@{/policy}">Chính sách</a></li>
+			<li><a th:href="@{/faq}">FAQ</a></li>
+            <!-- BEGIN TOP SEARCH -->
+            <li class="menu-search">
+              <span class="sep"></span>
+
+              <i class="fa fa-search search-btn"></i>
+              <div style="display: inline-flex;">
+                <form th:action="@{/product-search}" method="GET">
+                  <div class="input-group">
+                    <input type="text" name="keyword" placeholder="Search" class="form-control">
+                    <span class="input-group-btn">
+                      <button class="btn btn-primary" type="submit">Search</button>
+                    </span>
+                  </div>
+                </form>
+              </div> 
+				
+            </li>
+
+            <!-- END TOP SEARCH -->
+          </ul>
+        </div>
+        <!-- END NAVIGATION -->
+      </div>
+    </div>
+
+</th:block>
